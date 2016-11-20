@@ -22,7 +22,7 @@ export class LesshintMutationsProvider implements IMutationsProvider {
     /**
      * Initializes a new instance of the LesshintMutationsProvider class.
      * 
-     * @param settings   Settings to run LesshintWaveReporter.
+     * @param settings   Settings to run Lesshint.
      */
     public constructor(settings: IAutoLesshintSettings) {
         this.settings = Object.assign(

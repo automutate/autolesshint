@@ -5,4 +5,4 @@ Rough draft of a tool to automatically fixes Lesshint complaints.
 
 Stitches together [`lesshint`](https://github.com/lesshint/lesshint) and [`automutate`](https://github.com/autolint/automutate) to automatically fix `lesshint` rule complaints when possible.
 
-`automutate` runs waves `lesshint` and uses a [custom `lesshint` reporter](https://github.com/autolint/autolesshint/blob/master/src/lesshintWaveReporter.ts) to capture rule complaints.
+`automutate` runs waves of `lesshint` and uses a [custom `lesshint` reporter](https://github.com/autolint/autolesshint/blob/master/src/lesshintWaveReporter.ts) to capture rule complaints.

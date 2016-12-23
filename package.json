@@ -2,7 +2,7 @@
   "name": "autolesshint",
   "version": "0.1.0",
   "description": "Automagically fixes lesshint errors in .less files.",
-  "index": "lib/index.js",
+  "index": "bin/autolesshint",
   "directories": {
     "test": "test"
   },
@@ -48,6 +48,7 @@
   },
   "homepage": "https://github.com/autolint/autolesshint#readme",
   "dependencies": {
-    "automutate": "^0.3.0"
+    "automutate": "^0.3.0",
+    "commander": "^2.9.0"
   }
 }

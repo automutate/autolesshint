@@ -42,7 +42,7 @@ gulp.task("src:tsc", () => {
 });
 
 gulp.task("test:run", () => {
-    gulp.src("test/tests.js")
+    gulp.src("test/*.js")
         .pipe(mocha());
 });
 

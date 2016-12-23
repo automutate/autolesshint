@@ -5,30 +5,54 @@ import { FileMutationsApplier } from "automutate/lib/mutationsAppliers/fileMutat
 import { LesshintMutationsProvider } from "./lesshintMutationsProvider";
 
 /**
- * Settings to run Lesshint.
+ * Settings to run Autolesshint.
  */
 export interface IAutoLesshintSettings {
-    /**
-     * 	A minimatch glob pattern or a file to exclude from being linted.
-     */
-    exclude?: string[];
-
     /**
      * One or more files/directories to recursively scan.
      */
     args: string[];
+
+    /**
+     * Configuration file to use.
+     */
+    config?: string;
+
+    /**
+     * 	A minimatch glob pattern or a file to exclude from being linted.
+     */
+    exclude?: string[];
 }
 
-(async (settings: IAutoLesshintSettings): Promise<void> => {
-    const logger = new ConsoleLogger();
-    const autoMutator: AutoMutator = new AutoMutator(
-        new FileMutationsApplier(logger),
-        new LesshintMutationsProvider(settings),
-        logger);
+/**
+ * Runs autolesshint.
+ */
+export class Runner {
+    /**
+     * Runs waves of file mutations.
+     */
+    private autoMutator: AutoMutator;
 
-    await autoMutator
-        .run()
-        .catch(error => console.error("Error in autolesshint:", error));
-})({
-    args: ["test/before.less"]
-});
+    /**
+     * Initializes a new instance of the Runner class.
+     * 
+     * @param settings   Settings to run autolesshint.
+     */
+    public constructor(settings: IAutoLesshintSettings) {
+        const logger = new ConsoleLogger();
+
+        this.autoMutator = new AutoMutator(
+            new FileMutationsApplier(logger),
+            new LesshintMutationsProvider(settings),
+            logger);
+    }
+
+    /**
+     * @returns A Promise for running autolesshint.
+     */
+    public async run(): Promise<void> {
+        return this.autoMutator
+            .run()
+            .catch(error => console.error("Error in autolesshint:", error));
+    }
+}

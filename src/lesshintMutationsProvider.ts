@@ -3,7 +3,17 @@ const lesshint: any = require("lesshint/lib/cli");
 import { IFileMutations, IMutationsProvider, IMutationsWave } from "automutate/lib/mutationsProvider";
 
 import { IAutoLesshintSettings } from "./index";
-import { LesshintWaveReporter } from "./lesshintWaveReporter";
+import { ILesshintComplaint, LesshintWaveReporter } from "./lesshintWaveReporter";
+
+/**
+ * Settings to run mutations for Lesshint.
+ */
+export interface IMutationSettings extends IAutoLesshintSettings {
+    /**
+     * Lesshint reporter that keeps waves of complaints.
+     */
+    reporter: typeof LesshintWaveReporter;
+}
 
 /**
  * Provides waves of lesshint failure fixes as file mutations.
@@ -25,23 +35,22 @@ export class LesshintMutationsProvider implements IMutationsProvider {
      * @param settings   Settings to run Lesshint.
      */
     public constructor(settings: IAutoLesshintSettings) {
-        this.settings = Object.assign(
-            {
-                reporter: this.waveReporter
-            },
-            settings);
+        this.settings = {
+            reporter: this.waveReporter,
+            ...settings
+        };
     }
 
     /**
      * @returns A Promise for a wave of file mutations.
      */
     public async provide(): Promise<IMutationsWave> {
-        await lesshint(this.settings).catch((error: any) => error);
+        await lesshint(this.settings);
 
         return {
             fileMutations: this.groupMutationsByFiles(
                 this.waveReporter.pump()
-                    .filter((complaint: any): boolean => !!complaint.suggestedFix))
+                    .filter((complaint: ILesshintComplaint): boolean => !!complaint.suggestedFix))
         };
     }
 
@@ -51,7 +60,7 @@ export class LesshintMutationsProvider implements IMutationsProvider {
      * @param complaints   Complaints from lesshint.
      * @returns File-grouped complaints, if any.
      */
-    public groupMutationsByFiles(complaints: any[]): IFileMutations | undefined {
+    public groupMutationsByFiles(complaints: ILesshintComplaint[]): IFileMutations | undefined {
         if (!complaints.length) {
             return undefined;
         }
@@ -63,7 +72,7 @@ export class LesshintMutationsProvider implements IMutationsProvider {
                 fileMutations[complaint.fullPath] = [];
             }
 
-            fileMutations[complaint.fullPath].push(...complaint.suggestedFix);
+            fileMutations[complaint.fullPath].push(complaint.suggestedFix);
         }
 
         return fileMutations;

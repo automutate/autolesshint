@@ -9,9 +9,14 @@ import { LesshintMutationsProvider } from "./lesshintMutationsProvider";
  */
 export interface IAutoLesshintSettings {
     /**
-     * Files to check.
+     * 	A minimatch glob pattern or a file to exclude from being linted.
      */
-    args: string[];
+    exclude?: string[];
+
+    /**
+     * One or more files/directories to recursively scan.
+     */
+    files: string[];
 }
 
 (async (settings: IAutoLesshintSettings): Promise<void> => {
@@ -25,5 +30,5 @@ export interface IAutoLesshintSettings {
         .run()
         .catch(error => console.error("Error in autolesshint:", error));
 })({
-    args: ["test/before.less"]
+    files: ["test/before.less"]
 });

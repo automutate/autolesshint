@@ -1,9 +1,10 @@
-# Logs
 logs
 *.log
 npm-debug.log*
-
-# Built directories
 node_modules
 lib
+src/**/*.d.ts
+src/**/*.js
+test/**/*.d.ts
 test/**/*.js
+test/cases/**/actual.less

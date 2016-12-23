@@ -1,8 +1,8 @@
-const lesshint: any = require("lesshint/lib/cli");
+const lesshint = require("lesshint/lib/cli");
 
 import { IFileMutations, IMutationsProvider, IMutationsWave } from "automutate/lib/mutationsProvider";
 
-import { IAutoLesshintSettings } from "./index";
+import { IAutoLesshintSettings } from "./runner";
 import { ILesshintComplaint, LesshintWaveReporter } from "./lesshintWaveReporter";
 
 /**
@@ -37,6 +37,7 @@ export class LesshintMutationsProvider implements IMutationsProvider {
     public constructor(settings: IAutoLesshintSettings) {
         this.settings = {
             reporter: this.waveReporter,
+            suggestFixes: true,
             ...settings
         };
     }
@@ -45,7 +46,8 @@ export class LesshintMutationsProvider implements IMutationsProvider {
      * @returns A Promise for a wave of file mutations.
      */
     public async provide(): Promise<IMutationsWave> {
-        await lesshint(this.settings);
+        // Lesshint throws on any errors or warnings, so it must be caught here
+        await lesshint(this.settings).catch(() => {});
 
         return {
             fileMutations: this.groupMutationsByFiles(

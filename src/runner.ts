@@ -16,7 +16,7 @@ export interface IAutoLesshintSettings {
     /**
      * One or more files/directories to recursively scan.
      */
-    files: string[];
+    args: string[];
 }
 
 (async (settings: IAutoLesshintSettings): Promise<void> => {
@@ -30,5 +30,5 @@ export interface IAutoLesshintSettings {
         .run()
         .catch(error => console.error("Error in autolesshint:", error));
 })({
-    files: ["test/before.less"]
+    args: ["test/before.less"]
 });

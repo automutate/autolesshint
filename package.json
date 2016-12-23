@@ -9,6 +9,7 @@
   "devDependencies": {
     "@types/chai": "^3.4.34",
     "@types/glob": "^5.0.30",
+    "@types/mocha": "^2.2.34",
     "chai": "^3.5.0",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
@@ -47,6 +48,6 @@
   },
   "homepage": "https://github.com/autolint/autolesshint#readme",
   "dependencies": {
-    "automutate": "^0.2.1"
+    "automutate": "^0.3.0"
   }
 }

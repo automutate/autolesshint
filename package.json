@@ -48,7 +48,7 @@
   },
   "homepage": "https://github.com/autolint/autolesshint#readme",
   "dependencies": {
-    "automutate": "^0.3.0",
+    "automutate": "^0.3.1",
     "commander": "^2.9.0"
   }
 }

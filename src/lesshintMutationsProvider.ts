@@ -27,7 +27,6 @@ export class LesshintMutationsProvider implements IMutationsProvider {
     public constructor(settings: IAutoLesshintSettings) {
         this.settings = Object.assign(
             {
-                onExit: () => {},
                 reporter: this.waveReporter
             },
             settings);

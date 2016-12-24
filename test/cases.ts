@@ -5,10 +5,16 @@ import { TestsFactory } from "automutate/test/cases/testsFactory";
 
 (async (): Promise<void> => {
     const testsFactory = new TestsFactory(
-        (fileName: string) => new LesshintMutationsProvider({
-            args: [fileName]
+        (fileName: string, settingsFileName: string) => new LesshintMutationsProvider({
+            args: [fileName],
+            config: settingsFileName
         }),
-        ".less");
+        {
+            actual: "actual.less",
+            expected: "expected.less",
+            original: "original.less",
+            settings: ".lesshintrc"
+        });
 
     await testsFactory.create(path.join(__dirname, "cases"));
 })();

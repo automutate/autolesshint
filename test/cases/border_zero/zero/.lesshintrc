@@ -1,6 +1,9 @@
 {
     "attributeQuotes": false,
-    "borderZero": false,
+    "borderZero": {
+		"enabled": true,
+		"style": "zero"
+	},
     "comment": false,
     "decimalZero": false,
     "depthLevel": false,
@@ -30,7 +33,7 @@
     "spaceBetweenParens": false,
     "stringQuotes": false,
     "trailingSemicolon": false,
-    "trailingWhitespace": true,
+    "trailingWhitespace": false,
     "urlFormat": false,
     "urlQuotes": false,
     "zeroUnit": false

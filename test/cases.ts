@@ -16,5 +16,5 @@ import { TestsFactory } from "automutate/test/cases/testsFactory";
             settings: ".lesshintrc"
         });
 
-    await testsFactory.create(path.join(__dirname, "cases"));
+    await testsFactory.describe(path.join(__dirname, "cases"));
 })();

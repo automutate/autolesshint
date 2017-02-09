@@ -7,7 +7,7 @@ import { ISuggester } from "../suggester";
  * Suggesters, keyed by linter name.
  */
 interface ISuggesters {
-    [i: string]: ISuggester | undefined;
+    [i: string]: ISuggester<any> | undefined;
 }
 
 /**
@@ -30,7 +30,7 @@ export class SuggestersFactory {
      * @param linter   Name of a Lesshint linter.
      * @returns A Promise for the equivalent suggester, if possible.
      */
-    public async provide(linter: string): Promise<ISuggester | undefined> {
+    public async provide(linter: string): Promise<ISuggester<any> | undefined> {
         if (!(linter in this.suggesters)) {
             this.suggesters[linter] = await this.createSuggester(linter);
         }
@@ -44,7 +44,7 @@ export class SuggestersFactory {
      * @param linter   Name of a Lesshint linter.
      * @returns A Promise for the equivalent suggester, if possible.
      */
-    private async createSuggester(linter: string): Promise<ISuggester | undefined> {
+    private async createSuggester(linter: string): Promise<ISuggester<any> | undefined> {
         const suggesterName: string = linter[0].toUpperCase() + linter.substring(1) + "Suggester";
         const fileName: string = path.join(this.dirName, suggesterName) + ".js";
         const exists: boolean = await new Promise<boolean>((resolve) => {

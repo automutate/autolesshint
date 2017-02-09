@@ -2,17 +2,18 @@ const lesshint = require("lesshint/lib/cli");
 
 import { IFileMutations, IMutationsProvider, IMutationsWave } from "automutate/lib/mutationsProvider";
 
+import { ILesshintComplaint } from "./lesshint";
+import { LesshintWaveReporter } from "./lesshintWaveReporter";
 import { IAutoLesshintSettings } from "./runner";
-import { ILesshintComplaint, LesshintWaveReporter } from "./lesshintWaveReporter";
 
 /**
  * Settings to run mutations for Lesshint.
  */
-export interface IMutationSettings extends IAutoLesshintSettings {
+export interface IMutationsProviderSettings extends IAutoLesshintSettings {
     /**
      * Lesshint reporter that keeps waves of complaints.
      */
-    reporter: typeof LesshintWaveReporter;
+    reporter: LesshintWaveReporter;
 }
 
 /**
@@ -20,23 +21,18 @@ export interface IMutationSettings extends IAutoLesshintSettings {
  */
 export class LesshintMutationsProvider implements IMutationsProvider {
     /**
-     * Lesshint reporter that keeps waves of complaints.
-     */
-    private readonly waveReporter: LesshintWaveReporter = new LesshintWaveReporter();
-
-    /**
      * Settings to run Lesshint.
      */
-    private readonly settings: IAutoLesshintSettings;
+    private readonly settings: IMutationsProviderSettings;
 
     /**
      * Initializes a new instance of the LesshintMutationsProvider class.
      * 
      * @param settings   Settings to run Lesshint.
      */
-    public constructor(settings: IAutoLesshintSettings) {
+    public constructor(settings: IMutationsProviderSettings) {
         this.settings = {
-            reporter: this.waveReporter,
+            reporter: settings.reporter,
             suggestFixes: true,
             ...settings
         };
@@ -49,7 +45,7 @@ export class LesshintMutationsProvider implements IMutationsProvider {
         // Lesshint throws on any errors or warnings, so it must be caught here
         await lesshint(this.settings).catch((): void => {});
 
-        const complaints = (await this.waveReporter.pump())
+        const complaints = (await this.settings.reporter.pump())
             .filter((complaint: ILesshintComplaint): boolean => !!complaint.suggestedFix);
 
         return {

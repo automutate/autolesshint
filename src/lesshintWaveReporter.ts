@@ -1,75 +1,34 @@
-import { IMutation } from "automutate/lib/mutation";
-
+import { ILesshintComplaint, ILesshintConfig } from "./lesshint";
 import { RootSuggester } from "./suggesters/rootSuggester";
 
-/**
- * Complaint result from running Lesshint.
- */
-export interface ILesshintComplaint {
-    /**
-     * Starting column number of the complaint.
-     */
-    column: number;
-
-    /**
-     * File name of the offending file.
-     */
-    file: string;
-
-    /**
-     * Full path of the offending file.
-     */
-    fullPath: string;
-
-    /**
-     * Starting line number of the complaint.
-     */
-    line: number;
-
-    /**
-     * Name of the complaining linter.
-     */
-    linter: string;
-
-    /**
-     * Complaint message.
-     */
-    message: string;
-
-    /**
-     * Character offset the complaint starts at.
-     */
-    position: any;
-
-    /**
-     * Severity of the lint.
-     */
-    severity: "error" | "warning";
-
-    /**
-     * Offending piece of code.
-     */
-    source: string;
-
-    /**
-     * Suggested mutation(s) to fix the complaint.
-     */
-    suggestedFix?: IMutation;
-};
 
 /**
  * Lesshint reporter that keeps waves of complaints.
  */
 export class LesshintWaveReporter {
     /**
-     * 
+     * Generates suggesters for complaints.
      */
     private readonly rootSuggester: RootSuggester = new RootSuggester();
+
+    /**
+     * Lesshint configuration options, keyed by rule name.
+     */
+    private readonly configs: ILesshintConfig;
 
     /**
      * Most recent wave of reported complaints from Lesshint.
      */
     private complaints: ILesshintComplaint[] = [];
+
+    /**
+     * Initializes a new instance of the LesshintWaveReporter class.
+     * 
+     * @param config   Lesshint configuration options, keyed by rule name.
+     */
+    public constructor(configs: ILesshintConfig) {
+        this.configs = configs;
+    }
 
     /**
      * Receives a wave of complaints from Lesshint.
@@ -95,7 +54,7 @@ export class LesshintWaveReporter {
                         return;
                     }
 
-                    const suggestedFix = await this.rootSuggester.suggestMutation(complaint);
+                    const suggestedFix = await this.rootSuggester.suggestMutation(complaint, this.configs[complaint.linter]);
                     if (suggestedFix) {
                         complaint.suggestedFix = suggestedFix;
                     }

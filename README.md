@@ -6,6 +6,7 @@
 * [Installation](#installation)
 * [CLI usage](#cli-usage)
 * [Supported rules](#supported-rules)
+* [Contributing](#contributing)
 
 ## Installation
 
@@ -40,3 +41,27 @@ Available Flags       | Description
 * `url_quotes`
 
 See the [Complete rule coverage](https://github.com/automutate/autolesshint/milestone/1) milestone for upcoming coverage support.
+
+## Contributing
+
+`autolesshint` uses [Gulp](http://gulpjs.com/) to automate building, which requires [Node.js](http://node.js.org).
+
+To build from scratch, install NodeJS and run the following commands:
+
+```
+npm install -g gulp
+npm install
+gulp
+```
+
+[automutate](https://github.com/automutate/automutate) manages the runtime of taking in lint complaints from `lesshint`.
+These are mapped to `Suggester` classes in `src/suggesters` by name.
+
+[automutate-tests](https://github.com/automutate/automutate-tests) manages development-time tests verifying actual file mutations.
+
+### Adding a suggester
+
+* Add a `Suggester` class with a linter's name. `my_rule` would be mapped to `src/suggesters/myRuleSuggester.ts` that would have to export a `MyRuleSuggester` class that implements the `ISuggester` interface.
+* Add test case(s) under `test/cases` that each have an `original.less`, `expected.less`, `actual.less`, and `.lesshintrc`.
+* Add the suggester to the list in `README.md`.
+* Submit a PR referencing the issue corresponding to the lint rule.

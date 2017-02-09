@@ -1,6 +1,6 @@
 {
   "name": "autolesshint",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Automagically fixes lesshint errors in .less files.",
   "index": "bin/autolesshint",
   "bin": {
@@ -13,6 +13,7 @@
     "@types/chai": "^3.4.34",
     "@types/glob": "^5.0.30",
     "@types/mocha": "^2.2.34",
+    "automutate-tests": "^0.1.0",
     "chai": "^3.5.0",
     "del": "^2.2.2",
     "gulp": "^3.9.1",

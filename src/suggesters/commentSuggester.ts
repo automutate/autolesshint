@@ -13,7 +13,7 @@ export class CommentSuggester implements ISuggester<void> {
      * @param complaint   Complaint result from running Lesshint.
      * @param config   Configuration options for the rule.
      * @param linesRaw   Source file's raw line contents.
-     * @returns A Promise for a fix mutation, if possible.
+     * @returns Suggested mutation for the fix.
      */
     public suggestMutation(complaint: ILesshintComplaint, config: void, linesRaw: string[]): ITextDeleteMutation {
         const originalInput = linesRaw.join("");

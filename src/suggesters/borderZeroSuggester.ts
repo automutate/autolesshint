@@ -18,7 +18,7 @@ export class BorderZeroSuggester implements ISuggester<IBorderZeroConfig> {
      * Suggests a mutation to fix a complaint, if possible.
      * 
      * @param complaint   Complaint result from running Lesshint.
-     * @returns A Promise for a fix mutation, if possible.
+     * @returns Suggested mutation for the fix.
      */
     public suggestMutation(complaint: ILesshintComplaint, config: IBorderZeroConfig): ITextSwapMutation {
         let insertion: string;

@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
-var runner = require('../lib/runner').Runner;
+var Runner = require('../lib/runner').Runner;
 
 /**
  * Command line interface for autolesshint.

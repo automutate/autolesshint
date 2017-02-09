@@ -1,6 +1,6 @@
 import { ILesshintComplaint, ILesshintConfig } from "./lesshint";
 import { RootSuggester } from "./suggesters/rootSuggester";
-
+import { IFileContentsGetter } from "./fileContentsGetter";
 
 /**
  * Lesshint reporter that keeps waves of complaints.
@@ -17,6 +17,11 @@ export class LesshintWaveReporter {
     private readonly configs: ILesshintConfig;
 
     /**
+     * Retrieves the contents of files.
+     */
+    private readonly fileContentsGetter: IFileContentsGetter;
+
+    /**
      * Most recent wave of reported complaints from Lesshint.
      */
     private complaints: ILesshintComplaint[] = [];
@@ -25,9 +30,11 @@ export class LesshintWaveReporter {
      * Initializes a new instance of the LesshintWaveReporter class.
      * 
      * @param config   Lesshint configuration options, keyed by rule name.
+     * @param fileContentsGetter   Retrieves the contents of files.
      */
-    public constructor(configs: ILesshintConfig) {
+    public constructor(configs: ILesshintConfig, fileContentsGetter: IFileContentsGetter) {
         this.configs = configs;
+        this.fileContentsGetter = fileContentsGetter;
     }
 
     /**
@@ -54,7 +61,13 @@ export class LesshintWaveReporter {
                         return;
                     }
 
-                    const suggestedFix = await this.rootSuggester.suggestMutation(complaint, this.configs[complaint.linter]);
+                    const fileContents: string = await this.fileContentsGetter(complaint.fullPath);
+                    const linesRaw: string[] = fileContents.match(/[^\n]+(?:\r?\n|$)/g) as string[];
+                    const suggestedFix = await this.rootSuggester.suggestMutation(
+                        complaint,
+                        this.configs[complaint.linter],
+                        linesRaw);
+
                     if (suggestedFix) {
                         complaint.suggestedFix = suggestedFix;
                     }

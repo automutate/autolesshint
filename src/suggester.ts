@@ -13,7 +13,8 @@ export interface ISuggester<TConfig> {
      * 
      * @param complaint   Complaint result from running Lesshint.
      * @param config   Configuration options for the rule.
+     * @param linesRaw   Source file's raw line contents.
      * @returns A fix mutation, if possible.
      */
-    suggestMutation(complaint: ILesshintComplaint, config: TConfig): IMutation | undefined;
+    suggestMutation(complaint: ILesshintComplaint, config: TConfig, linesRaw: string[]): IMutation | undefined;
 }

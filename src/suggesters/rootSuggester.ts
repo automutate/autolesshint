@@ -18,14 +18,15 @@ export class RootSuggester {
      * 
      * @param complaint   Complaint result from running Lesshint.
      * @param config   Configuration options for the rule.
+     * @param linesRaw   Source file's raw line contents.
      * @returns A Promise for a fix mutation, if possible.
      */
-    public async suggestMutation(complaint: ILesshintComplaint, config: any): Promise<IMutation | undefined> {
+    public async suggestMutation(complaint: ILesshintComplaint, config: any, linesRaw: string[]): Promise<IMutation | undefined> {
         const suggester: ISuggester<any> | undefined = await this.suggestersFactory.provide(complaint.linter);
         if (!suggester) {
             return undefined;
         }
 
-        return suggester.suggestMutation(complaint, config);
+        return suggester.suggestMutation(complaint, config, linesRaw);
     }
 }

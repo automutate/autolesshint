@@ -3,6 +3,7 @@ import { ConsoleLogger } from "automutate/lib/loggers/consoleLogger";
 import { FileMutationsApplier } from "automutate/lib/mutationsAppliers/fileMutationsApplier";
 import * as fs from "fs";
 
+import { fileContentsGetter } from "./fileContentsGetter";
 import { ILesshintConfig } from "./lesshint";
 import { LesshintMutationsProvider } from "./lesshintMutationsProvider";
 import { LesshintWaveReporter } from "./lesshintWaveReporter";
@@ -55,7 +56,7 @@ export class Runner {
                 error ? reject(error) : resolve(JSON.parse(contents.toString()));
             });
         });
-        const waveReporter: LesshintWaveReporter = new LesshintWaveReporter(configs);
+        const waveReporter: LesshintWaveReporter = new LesshintWaveReporter(configs, fileContentsGetter);
 
         const autoMutator: AutoMutator = new AutoMutator(
             new FileMutationsApplier(logger),

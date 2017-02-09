@@ -3,7 +3,7 @@ import * as fs from "fs";
 
 import { LesshintMutationsProvider } from "../lib/lesshintMutationsProvider";
 import { LesshintWaveReporter } from "../lib/lesshintWaveReporter";
-
+import { fileContentsGetter } from "../lib/fileContentsGetter";
 
 const testsFactory = new TestsFactory(
     (fileName: string, settingsFileName: string) => {
@@ -12,7 +12,7 @@ const testsFactory = new TestsFactory(
         return new LesshintMutationsProvider({
             args: [fileName],
             config: settingsFileName,
-            reporter: new LesshintWaveReporter(configs)
+            reporter: new LesshintWaveReporter(configs, fileContentsGetter)
         });
     },
     {

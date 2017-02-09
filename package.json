@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "Automagically fixes lesshint errors in .less files.",
   "index": "bin/autolesshint",
+  "bin": {
+    "autolesshint": "./bin/autolesshint"
+  },
   "directories": {
     "test": "test"
   },

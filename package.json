@@ -49,6 +49,7 @@
   "homepage": "https://github.com/autolint/autolesshint#readme",
   "dependencies": {
     "automutate": "^0.3.3",
-    "commander": "^2.9.0"
+    "commander": "^2.9.0",
+    "lesshint": "^3.0.0"
   }
 }

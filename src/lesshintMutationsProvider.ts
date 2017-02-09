@@ -47,12 +47,13 @@ export class LesshintMutationsProvider implements IMutationsProvider {
      */
     public async provide(): Promise<IMutationsWave> {
         // Lesshint throws on any errors or warnings, so it must be caught here
-        await lesshint(this.settings).catch(() => {});
+        await lesshint(this.settings).catch((): void => {});
+
+        const complaints = (await this.waveReporter.pump())
+            .filter((complaint: ILesshintComplaint): boolean => !!complaint.suggestedFix);
 
         return {
-            fileMutations: this.groupMutationsByFiles(
-                this.waveReporter.pump()
-                    .filter((complaint: ILesshintComplaint): boolean => !!complaint.suggestedFix))
+            fileMutations: this.groupMutationsByFiles(complaints)
         };
     }
 
@@ -74,7 +75,7 @@ export class LesshintMutationsProvider implements IMutationsProvider {
                 fileMutations[complaint.fullPath] = [];
             }
 
-            fileMutations[complaint.fullPath].push(complaint.suggestedFix);
+            fileMutations[complaint.fullPath].push(complaint.suggestedFix!);
         }
 
         return fileMutations;

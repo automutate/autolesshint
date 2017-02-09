@@ -1,5 +1,7 @@
 import { IMutation } from "automutate/lib/mutation";
 
+import { RootSuggester } from "./suggesters/rootSuggester";
+
 /**
  * Complaint result from running Lesshint.
  */
@@ -35,6 +37,11 @@ export interface ILesshintComplaint {
     message: string;
 
     /**
+     * Character offset the complaint starts at.
+     */
+    position: any;
+
+    /**
      * Severity of the lint.
      */
     severity: "error" | "warning";
@@ -47,13 +54,18 @@ export interface ILesshintComplaint {
     /**
      * Suggested mutation(s) to fix the complaint.
      */
-    suggestedFix: IMutation;
+    suggestedFix?: IMutation;
 };
 
 /**
  * Lesshint reporter that keeps waves of complaints.
  */
 export class LesshintWaveReporter {
+    /**
+     * 
+     */
+    private readonly rootSuggester: RootSuggester = new RootSuggester();
+
     /**
      * Most recent wave of reported complaints from Lesshint.
      */
@@ -71,10 +83,23 @@ export class LesshintWaveReporter {
      * 
      * @returns The most recent complaints wave.
      */
-    public pump(): ILesshintComplaint[] {
+    public async pump(): Promise<ILesshintComplaint[]> {
         const pumpedComplaints: ILesshintComplaint[] = this.complaints;
 
         this.complaints = [];
+
+        await Promise.all(
+            pumpedComplaints.map(
+                async (complaint: ILesshintComplaint): Promise<void> => {
+                    if (complaint.suggestedFix) {
+                        return;
+                    }
+
+                    const suggestedFix = await this.rootSuggester.suggestMutation(complaint);
+                    if (suggestedFix) {
+                        complaint.suggestedFix = suggestedFix;
+                    }
+                }));
 
         return pumpedComplaints;
     }

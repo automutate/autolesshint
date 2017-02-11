@@ -1,7 +1,7 @@
 import { ITextInsertMutation } from "automutate/lib/mutators/textInsertMutator";
 
 import { ILesshintComplaint } from "../lesshint";
-import { ISuggester } from "../suggester";
+import { IFileInfo, ISuggester } from "../suggester";
 
 /**
  * Adds fix suggestions for the finalNewline rule.
@@ -12,10 +12,10 @@ export class FinalNewlineSuggester implements ISuggester<void> {
      * 
      * @param complaint   Complaint result from running Lesshint.
      * @param config   Configuration options for the rule.
-     * @param linesRaw   Source file's raw line contents.
+     * @param fileInfo   Contents of the source file in various forms.
      * @returns Suggested mutation for the fix.
      */
-    public suggestMutation(complaint: ILesshintComplaint, config: void, linesRaw: string[]): ITextInsertMutation {
+    public suggestMutation(complaint: ILesshintComplaint, config: void, fileInfo: IFileInfo): ITextInsertMutation {
         return {
             insertion: "\n",
             range: {

@@ -2,6 +2,7 @@ import { ITextInsertMutation } from "automutate/lib/mutators/textInsertMutator";
 
 import { ILesshintComplaint } from "../lesshint";
 import { IFileInfo, ISuggester } from "../suggester";
+import { getLinebreakStyle } from "../utils";
 
 /**
  * Adds fix suggestions for the finalNewline rule.
@@ -17,7 +18,7 @@ export class FinalNewlineSuggester implements ISuggester<void> {
      */
     public suggestMutation(complaint: ILesshintComplaint, config: void, fileInfo: IFileInfo): ITextInsertMutation {
         return {
-            insertion: "\n",
+            insertion: getLinebreakStyle(fileInfo.linesRaw),
             range: {
                 begin: complaint.position
             },

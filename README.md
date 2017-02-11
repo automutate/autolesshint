@@ -36,6 +36,7 @@ Available Flags       | Description
 * `border_zero`
 * `comment`
 * `final_newline`
+* `newline_after_block`
 * `trailing_semicolon`
 * `trailing_whitespace`
 * `url_quotes`

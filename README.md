@@ -39,6 +39,7 @@ Available Flags       | Description
 * `trailing_semicolon`
 * `trailing_whitespace`
 * `url_quotes`
+* `zero_unit`
 
 See the [Complete rule coverage](https://github.com/automutate/autolesshint/milestone/1) milestone for upcoming coverage support.
 

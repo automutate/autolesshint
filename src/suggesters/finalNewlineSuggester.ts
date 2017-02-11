@@ -16,16 +16,8 @@ export class FinalNewlineSuggester implements ISuggester<void> {
      * @returns Suggested mutation for the fix.
      */
     public suggestMutation(complaint: ILesshintComplaint, config: void, linesRaw: string[]): ITextInsertMutation {
-        let useWindowsEndlines;
-
-        if (linesRaw.length > 1 && linesRaw[0][linesRaw[0].length - 1] === "\n") {
-            useWindowsEndlines = linesRaw[0].substring(linesRaw[0].length - 2) === "\r\n";
-        } else {
-            useWindowsEndlines = process.platform.indexOf("win") === 0;
-        }
-
         return {
-            insertion: useWindowsEndlines ? "\r\n" : "\n",
+            insertion: "\n",
             range: {
                 begin: complaint.position
             },

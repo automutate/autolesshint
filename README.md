@@ -35,6 +35,7 @@ Available Flags       | Description
 * `attribute_quotes`
 * `border_zero`
 * `comment`
+* `empty_rule`
 * `final_newline`
 * `trailing_semicolon`
 * `trailing_whitespace`

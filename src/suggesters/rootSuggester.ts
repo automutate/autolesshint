@@ -1,7 +1,7 @@
 import { IMutation } from "automutate/lib/mutation";
 
 import { ILesshintComplaint } from "../lesshint";
-import { ISuggester } from "../suggester";
+import { IFileInfo, ISuggester } from "../suggester";
 import { SuggestersFactory } from "./suggestersFactory";
 
 /**
@@ -18,15 +18,15 @@ export class RootSuggester {
      * 
      * @param complaint   Complaint result from running Lesshint.
      * @param config   Configuration options for the rule.
-     * @param linesRaw   Source file's raw line contents.
+     * @param fileInfo   Contents of the source file in various forms.
      * @returns A Promise for a fix mutation, if possible.
      */
-    public async suggestMutation(complaint: ILesshintComplaint, config: any, linesRaw: string[]): Promise<IMutation | undefined> {
+    public async suggestMutation(complaint: ILesshintComplaint, config: any, fileInfo: IFileInfo): Promise<IMutation | undefined> {
         const suggester: ISuggester<any> | undefined = await this.suggestersFactory.provide(complaint.linter);
         if (!suggester) {
             return undefined;
         }
 
-        return suggester.suggestMutation(complaint, config, linesRaw);
+        return suggester.suggestMutation(complaint, config, fileInfo);
     }
 }

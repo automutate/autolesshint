@@ -66,7 +66,10 @@ export class LesshintWaveReporter {
                     const suggestedFix = await this.rootSuggester.suggestMutation(
                         complaint,
                         this.configs[complaint.linter],
-                        linesRaw);
+                        {
+                            linesRaw,
+                            text: fileContents
+                        });
 
                     if (suggestedFix) {
                         complaint.suggestedFix = suggestedFix;

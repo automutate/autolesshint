@@ -1,7 +1,7 @@
 # autolesshint
 [![npm](https://img.shields.io/npm/v/autolesshint.svg)](https://www.npmjs.com/package/autolesshint)
 
-`autolesshint` is a tool to automatically fix [Lesshint](https://github.com/lesshint/lesshint) complaints.
+`autolesshint` is a tool to automatically fix [Lesshint](https://github.com/lesshint/lesshint) >=v3.0.1 complaints.
 
 * [Installation](#installation)
 * [CLI usage](#cli-usage)

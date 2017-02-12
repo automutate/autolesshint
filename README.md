@@ -55,6 +55,7 @@ These rules contain logic that require user input and can't be automatically fix
 
 * `depth_level`
 * `duplicate_property`
+* `hex_validation`
 * `id_selector`
 * `import_path`
 * `important_rule`

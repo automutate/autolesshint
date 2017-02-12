@@ -48,6 +48,21 @@ Available Flags       | Description
 
 See the [Complete rule coverage](https://github.com/automutate/autolesshint/milestone/1) milestone for upcoming coverage support.
 
+## Unsupported rules
+
+These rules contain logic that require user input and can't be automatically fixed:
+
+* `depth_level`
+* `duplicate_property`
+* `id_selector`
+* `import_path`
+* `important_rule`
+* `max_char_per_line`
+* `property_units`
+* `qualifying_element`
+* `selector_naming`
+* `url_format`
+
 ## Contributing
 
 `autolesshint` uses [Gulp](http://gulpjs.com/) to automate building, which requires [Node.js](http://node.js.org).

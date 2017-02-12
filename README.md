@@ -38,6 +38,7 @@ Available Flags       | Description
 * `empty_rule`
 * `final_newline`
 * `hex_length`
+* `hex_notation`
 * `newline_after_block`
 * `space_before_brace`
 * `space_between_parens`

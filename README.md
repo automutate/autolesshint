@@ -40,6 +40,7 @@ Available Flags       | Description
 * `hex_length`
 * `hex_notation`
 * `newline_after_block`
+* `single_line_per_selector`
 * `space_before_brace`
 * `space_between_parens`
 * `string_quotes`

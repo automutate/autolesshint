@@ -37,8 +37,9 @@ Available Flags       | Description
 * `comment`
 * `empty_rule`
 * `final_newline`
-* `space_before_brace`
+* `hex_length`
 * `newline_after_block`
+* `space_before_brace`
 * `space_between_parens`
 * `string_quotes`
 * `trailing_semicolon`

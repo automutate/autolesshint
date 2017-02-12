@@ -39,6 +39,7 @@ Available Flags       | Description
 * `final_newline`
 * `space_before_brace`
 * `newline_after_block`
+* `string_quotes`
 * `trailing_semicolon`
 * `trailing_whitespace`
 * `url_quotes`

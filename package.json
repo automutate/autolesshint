@@ -9,6 +9,11 @@
   "directories": {
     "test": "test"
   },
+  "dependencies": {
+    "automutate": "^0.3.3",
+    "commander": "^2.9.0",
+    "lesshint": "^3.0.1"
+  },
   "devDependencies": {
     "@types/chai": "^3.4.34",
     "@types/glob": "^5.0.30",
@@ -49,11 +54,6 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/autolint/autolesshint/issues"
-  },
-  "homepage": "https://github.com/autolint/autolesshint#readme",
-  "dependencies": {
-    "automutate": "^0.3.3",
-    "commander": "^2.9.0",
-    "lesshint": "^3.0.0"
   }
+  "homepage": "https://github.com/autolint/autolesshint#readme",
 }

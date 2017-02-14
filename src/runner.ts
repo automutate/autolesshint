@@ -1,6 +1,4 @@
 import { AutoMutator } from "automutate/lib/automutator";
-import { ConsoleLogger } from "automutate/lib/loggers/consoleLogger";
-import { FileMutationsApplier } from "automutate/lib/mutationsAppliers/fileMutationsApplier";
 import * as fs from "fs";
 
 import { fileContentsGetter } from "./fileContentsGetter";
@@ -50,7 +48,6 @@ export class Runner {
      * @returns A Promise for running autolesshint.
      */
     public async run(): Promise<void> {
-        const logger: ConsoleLogger = new ConsoleLogger();
         const configs: ILesshintConfig = await new Promise<ILesshintConfig>((resolve, reject) => {
             fs.readFile(this.settings.config, (error: Error | undefined, contents: string | Buffer): void => {
                 error ? reject(error) : resolve(JSON.parse(contents.toString()));
@@ -58,13 +55,12 @@ export class Runner {
         });
         const waveReporter: LesshintWaveReporter = new LesshintWaveReporter(configs, fileContentsGetter);
 
-        const autoMutator: AutoMutator = new AutoMutator(
-            new FileMutationsApplier(logger),
-            new LesshintMutationsProvider({
+        const autoMutator: AutoMutator = new AutoMutator({
+            mutationsProvider: new LesshintMutationsProvider({
                 reporter: waveReporter,
                 ...this.settings
-            }),
-            logger);
+            })
+        });
 
         return autoMutator
             .run()

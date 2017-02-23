@@ -1,4 +1,4 @@
-import { AutoMutator } from "automutate/lib/automutator";
+import { AutoMutator } from "automutate/lib/autoMutator";
 import * as fs from "fs";
 
 import { fileContentsGetter } from "./fileContentsGetter";

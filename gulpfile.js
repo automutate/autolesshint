@@ -1,13 +1,13 @@
-const del = require("del");
-const gulp = require("gulp");
-const merge = require("merge2");
-const mocha = require("gulp-mocha");
-const runSequence = require("run-sequence");
-const sourcemaps = require("gulp-sourcemaps");
-const ts = require("gulp-typescript");
-const tslint = require("gulp-tslint");
+var del = require("del");
+var gulp = require("gulp");
+var merge = require("merge2");
+var mocha = require("gulp-mocha");
+var runSequence = require("run-sequence");
+var sourcemaps = require("gulp-sourcemaps");
+var ts = require("gulp-typescript");
+var tslint = require("gulp-tslint");
 
-gulp.task("clean", () => {
+gulp.task("clean", function () {
     return del([
         "lib/*",
         "src/**/*.d.ts",
@@ -17,7 +17,7 @@ gulp.task("clean", () => {
     ]);
 });
 
-gulp.task("src:tslint", () => {
+gulp.task("src:tslint", function () {
     return gulp
         .src(["src/**/*.ts", "!src/**/*.d.ts"])
         .pipe(tslint({
@@ -26,9 +26,9 @@ gulp.task("src:tslint", () => {
         .pipe(tslint.report());
 });
 
-gulp.task("src:tsc", () => {
-    const tsProject = ts.createProject("tsconfig.json");
-    const tsResult = gulp
+gulp.task("src:tsc", function () {
+    var tsProject = ts.createProject("tsconfig.json");
+    var tsResult = gulp
         .src(["src/**/*.ts", "!src/**/*.d.ts"])
         .pipe(sourcemaps.init())
         .pipe(tsProject());
@@ -41,12 +41,12 @@ gulp.task("src:tsc", () => {
     ]);
 });
 
-gulp.task("test:run", () => {
+gulp.task("test:run", function () {
     gulp.src("test/*.js")
         .pipe(mocha());
 });
 
-gulp.task("test:tslint", () => {
+gulp.task("test:tslint", function () {
     return gulp
         .src(["test/**/*.ts", "!test/**/*.d.ts"])
         .pipe(tslint({
@@ -55,9 +55,9 @@ gulp.task("test:tslint", () => {
         .pipe(tslint.report());
 });
 
-gulp.task("test:tsc", () => {
-    const tsProject = ts.createProject("tsconfig.json");
-    const tsResult = gulp
+gulp.task("test:tsc", function () {
+    var tsProject = ts.createProject("tsconfig.json");
+    var tsResult = gulp
         .src(["test/**/*.ts", "!test/**/*.d.ts"])
         .pipe(sourcemaps.init())
         .pipe(tsProject({
@@ -72,18 +72,18 @@ gulp.task("test:tsc", () => {
     ]);
 });
 
-gulp.task("src", callback => {
+gulp.task("src", function (callback) {
     runSequence(["src:tsc", "src:tslint"], callback);
 });
 
-gulp.task("test", callback => {
+gulp.task("test", function (callback) {
     runSequence(["test:tsc", "test:tslint"], "test:run", callback);
 });
 
-gulp.task("watch", ["default"], () => {
+gulp.task("watch", ["default"], function () {
     gulp.watch("src/**/*.ts", ["default"]);
 });
 
-gulp.task("default", callback => {
+gulp.task("default", function (callback) {
     runSequence("clean", "src", "test", callback);
 });

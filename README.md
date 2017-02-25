@@ -3,6 +3,8 @@
 
 `autolesshint` is a tool to automatically fix [Lesshint](https://github.com/lesshint/lesshint) >=v3.0.1 complaints.
 
+***Note: This is pre-1.0, and may have issues on non-Windows systems.***
+
 * [Installation](#installation)
 * [CLI usage](#cli-usage)
 * [Supported rules](#supported-rules)

@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@types/chai": "^3.4.34",
+    "@types/es6-promise": "0.0.32",
     "@types/glob": "^5.0.30",
     "@types/mocha": "^2.2.34",
     "automutate-tests": "^0.1.0",

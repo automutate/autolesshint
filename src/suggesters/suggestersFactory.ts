@@ -45,7 +45,7 @@ export class SuggestersFactory {
      * @returns A Promise for the equivalent suggester, if possible.
      */
     private async createSuggester(linter: string): Promise<ISuggester<any> | undefined> {
-        const suggesterName: string = linter[0].toUpperCase() + linter.substring(1) + "Suggester";
+        const suggesterName: string = linter[0].toLowerCase() + linter.substring(1) + "Suggester";
         const fileName: string = path.join(this.dirName, suggesterName) + ".js";
         const exists: boolean = await new Promise<boolean>((resolve) => {
             fs.exists(fileName, (exists: boolean): void => resolve(exists));

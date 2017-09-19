@@ -16,15 +16,35 @@ export interface IAutoLesshintSettings {
     args: string[];
 
     /**
-     * Lesshint configuration options, keyed by rule name.
+     * Path to a lesshint configuration file.
      */
-    config: string;
+    config?: string;
 
     /**
      * 	A minimatch glob pattern or a file to exclude from being linted.
      */
     exclude?: string[];
 }
+
+/**
+ * Parses config settings from a local file, if available.
+ * 
+ * @param configFilePath   Path to a settings file, if available.
+ * @returns A Promise for configuration settings.
+ */
+const getConfigSettings = async (configFilePath?: string) => {
+    if (configFilePath === undefined) {
+        return {};
+    }
+
+    return await new Promise<ILesshintConfig>((resolve, reject) => {
+        fs.readFile(configFilePath, (error: Error | undefined, contents: string | Buffer): void => {
+            error
+                ? resolve({})
+                : resolve(JSON.parse(contents.toString()));
+        });
+    });
+};
 
 /**
  * Runs autolesshint.
@@ -48,11 +68,20 @@ export class Runner {
      * @returns A Promise for running autolesshint.
      */
     public async run(): Promise<void> {
-        const configs: ILesshintConfig = await new Promise<ILesshintConfig>((resolve, reject) => {
-            fs.readFile(this.settings.config, (error: Error | undefined, contents: string | Buffer): void => {
-                error ? reject(error) : resolve(JSON.parse(contents.toString()));
-            });
-        });
+        const configs: ILesshintConfig = await getConfigSettings(this.settings.config);
+
+        try {
+            await this.runWithConfigs(configs);
+        } catch (error) {
+            console.error("Error in autolesshint:", error);
+        }
+    }
+
+    /**
+     * @param configs Lesshint configuration settings.
+     * @returns A Promise for running autolesshint.
+     */
+    private async runWithConfigs(configs: ILesshintConfig): Promise<void> {
         const waveReporter: LesshintWaveReporter = new LesshintWaveReporter(configs, fileContentsGetter);
 
         const autoMutator: AutoMutator = new AutoMutator({
@@ -62,8 +91,6 @@ export class Runner {
             })
         });
 
-        return autoMutator
-            .run()
-            .catch(error => console.error("Error in autolesshint:", error));
+        await autoMutator.run();
     }
 }

@@ -80,8 +80,8 @@ gulp.task("test", function (callback) {
     runSequence(["test:tsc", "test:tslint"], "test:run", callback);
 });
 
-gulp.task("watch", ["default"], function () {
-    gulp.watch("src/**/*.ts", ["default"]);
+gulp.task("watch", ["src"], function () {
+    return gulp.watch("src/**/*.ts", ["src"]);
 });
 
 gulp.task("default", function (callback) {

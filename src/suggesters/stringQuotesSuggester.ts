@@ -17,14 +17,14 @@ export interface IStringQuotesConfig {
 export class StringQuotesSuggester implements ISuggester<IStringQuotesConfig> {
     /**
      * Suggests a mutation to fix a complaint, if possible.
-     * 
+     *
      * @param complaint   Complaint result from running Lesshint.
      * @param config   Configuration options for the rule.
      * @returns Suggested mutation for the fix.
      */
     public suggestMutation(complaint: ILesshintComplaint, config: IStringQuotesConfig): IMutations {
-        const preferredQuote: string = config.style === "double" ? `"` : `'`;
-        const currentQuote: string = config.style === "double" ? `'` : `"`;
+        const preferredQuote: string = config.style === "double" ? '"' : "'";
+        const currentQuote: string = config.style === "double" ? "'" : '"';
         const endOffset: number = complaint.source.lastIndexOf(currentQuote) - complaint.source.indexOf(currentQuote);
 
         return {

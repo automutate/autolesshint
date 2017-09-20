@@ -27,7 +27,7 @@ export class LesshintMutationsProvider implements IMutationsProvider {
 
     /**
      * Initializes a new instance of the LesshintMutationsProvider class.
-     * 
+     *
      * @param settings   Settings to run Lesshint.
      */
     public constructor(settings: IMutationsProviderSettings) {
@@ -38,6 +38,8 @@ export class LesshintMutationsProvider implements IMutationsProvider {
     }
 
     /**
+     * Creates a wave of file mutations.
+     *
      * @returns A Promise for a wave of file mutations.
      */
     public async provide(): Promise<IMutationsWave> {
@@ -54,7 +56,7 @@ export class LesshintMutationsProvider implements IMutationsProvider {
 
     /**
      * Groups lesshint complaints into file mutations.
-     * 
+     *
      * @param complaints   Complaints from lesshint.
      * @returns File-grouped complaints, if any.
      */

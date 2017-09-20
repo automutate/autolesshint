@@ -53,7 +53,7 @@ export interface ILesshintComplaint {
      * Suggested mutation(s) to fix the complaint.
      */
     suggestedFix?: IMutation;
-};
+}
 
 /**
  * Lesshint configuration options, keyed by rule name.

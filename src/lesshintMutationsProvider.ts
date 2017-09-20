@@ -33,7 +33,6 @@ export class LesshintMutationsProvider implements IMutationsProvider {
     public constructor(settings: IMutationsProviderSettings) {
         this.settings = {
             reporter: settings.reporter,
-            suggestFixes: true,
             ...settings
         };
     }

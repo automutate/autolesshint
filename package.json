@@ -11,29 +11,27 @@
   },
   "dependencies": {
     "automutate": "0.5.X",
-    "commander": "^2.9.0",
-    "lesshint": "^3.1.0"
+    "commander": "^2.11.0",
+    "lesshint": "^4.1.1"
   },
   "devDependencies": {
-    "@types/chai": "^3.4.34",
-    "@types/es6-promise": "0.0.32",
-    "@types/glob": "^5.0.30",
-    "@types/mocha": "^2.2.34",
-    "automutate-tests": "^0.1.0",
-    "chai": "^3.5.0",
-    "del": "^2.2.2",
+    "@types/chai": "^4.0.4",
+    "@types/es6-promise": "0.0.33",
+    "@types/glob": "^5.0.32",
+    "@types/mocha": "^2.2.43",
+    "automutate-tests": "^0.1.2",
+    "chai": "^4.1.2",
+    "del": "^3.0.0",
     "gulp": "^3.9.1",
-    "gulp-mocha": "^3.0.1",
-    "gulp-sourcemaps": "^1.9.1",
-    "gulp-tslint": "^7.0.1",
-    "gulp-typescript": "^3.1.3",
-    "merge2": "^1.0.2",
-    "mocha": "^3.2.0",
-    "run-sequence": "^1.2.2",
-    "tslint": "^4.1.1",
-    "tslint-eslint-rules": "^3.2.1",
-    "tslint-microsoft-contrib": "^4.0.0",
-    "typescript": "^2.1.4"
+    "gulp-mocha": "^4.3.1",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-tslint": "^8.1.2",
+    "gulp-typescript": "^3.2.2",
+    "merge2": "^1.2.0",
+    "mocha": "^3.5.3",
+    "run-sequence": "^2.2.0",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.2"
   },
   "scripts": {
     "test": "gulp test"

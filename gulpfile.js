@@ -4,8 +4,6 @@ var merge = require("merge2");
 var mocha = require("gulp-mocha");
 var runSequence = require("run-sequence");
 var sourcemaps = require("gulp-sourcemaps");
-var ts = require("gulp-typescript");
-var tslint = require("gulp-tslint");
 
 gulp.task("clean", function () {
     return del([
@@ -18,15 +16,23 @@ gulp.task("clean", function () {
 });
 
 gulp.task("src:tslint", function () {
+    var gulpTslint = require("gulp-tslint");
+    var tslint = require("tslint");
+
+    var program = tslint.Linter.createProgram("./tsconfig.json");
+
     return gulp
-        .src(["src/**/*.ts", "!src/**/*.d.ts"])
-        .pipe(tslint({
-            formatter: "verbose"
+        .src("src/**/*.ts")
+        .pipe(gulpTslint({
+            formatter: "stylish",
+            program
         }))
-        .pipe(tslint.report());
+        .pipe(gulpTslint.report());
 });
 
 gulp.task("src:tsc", function () {
+    var ts = require("gulp-typescript");
+
     var tsProject = ts.createProject("tsconfig.json");
     var tsResult = gulp
         .src(["src/**/*.ts", "!src/**/*.d.ts"])
@@ -47,15 +53,23 @@ gulp.task("test:run", function () {
 });
 
 gulp.task("test:tslint", function () {
+    var gulpTslint = require("gulp-tslint");
+    var tslint = require("tslint");
+
+    var program = tslint.Linter.createProgram("./test/tsconfig.json");
+
     return gulp
         .src(["test/**/*.ts", "!test/**/*.d.ts"])
-        .pipe(tslint({
-            formatter: "verbose"
+        .pipe(gulpTslint({
+            formatter: "stylish",
+            program
         }))
-        .pipe(tslint.report());
+        .pipe(gulpTslint.report());
 });
 
 gulp.task("test:tsc", function () {
+    var ts = require("gulp-typescript");
+
     var tsProject = ts.createProject("tsconfig.json");
     var tsResult = gulp
         .src(["test/**/*.ts", "!test/**/*.d.ts"])

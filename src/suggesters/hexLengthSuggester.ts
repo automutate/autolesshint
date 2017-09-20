@@ -16,7 +16,7 @@ export interface IHexLengthConfig {
 export class HexLengthSuggester implements ISuggester<IHexLengthConfig> {
     /**
      * Suggests a mutation to fix a complaint.
-     * 
+     *
      * @param complaint   Complaint result from running Lesshint.
      * @param config   Configuration options for the rule.
      * @returns Suggested mutation for the fix.
@@ -29,7 +29,7 @@ export class HexLengthSuggester implements ISuggester<IHexLengthConfig> {
 
     /**
      * Suggests a mutation to fix a complaint that a hex should be short.
-     * 
+     *
      * @param complaint   Complaint result from running Lesshint.
      * @param fileInfo   Contents of the source file in various forms.
      * @returns Suggested mutation for the fix.
@@ -52,7 +52,7 @@ export class HexLengthSuggester implements ISuggester<IHexLengthConfig> {
 
     /**
      * Suggests a mutation to fix a complaint that a hex should be long.
-     * 
+     *
      * @param complaint   Complaint result from running Lesshint.
      * @param fileInfo   Contents of the source file in various forms.
      * @returns Suggested mutation for the fix.

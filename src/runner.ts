@@ -28,7 +28,7 @@ export interface IAutoLesshintSettings {
 
 /**
  * Parses config settings from a local file, if available.
- * 
+ *
  * @param configFilePath   Path to a settings file, if available.
  * @returns A Promise for configuration settings.
  */
@@ -57,7 +57,7 @@ export class Runner {
 
     /**
      * Initializes a new instance of the Runner class.
-     * 
+     *
      * @param settings   Settings to run Autolesshint.
      */
     public constructor(settings: IAutoLesshintSettings) {
@@ -65,6 +65,8 @@ export class Runner {
     }
 
     /**
+     * Runs autolesshint.
+     *
      * @returns A Promise for running autolesshint.
      */
     public async run(): Promise<void> {
@@ -73,11 +75,14 @@ export class Runner {
         try {
             await this.runWithConfigs(configs);
         } catch (error) {
+            // tslint:disable-next-line:no-console
             console.error("Error in autolesshint:", error);
         }
     }
 
     /**
+     * Runs autolesshint with lesshint config settings.
+     *
      * @param configs Lesshint configuration settings.
      * @returns A Promise for running autolesshint.
      */

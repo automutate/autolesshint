@@ -17,7 +17,7 @@ export interface ISpaceBetweenParensConfig {
 export class SpaceBetweenParensSuggester implements ISuggester<ISpaceBetweenParensConfig> {
     /**
      * Suggests a mutation to fix a complaint.
-     * 
+     *
      * @param complaint   Complaint result from running Lesshint.
      * @param config   Configuration options for the rule.
      * @param fileInfo   Contents of the source file in various forms.
@@ -31,7 +31,7 @@ export class SpaceBetweenParensSuggester implements ISuggester<ISpaceBetweenPare
 
     /**
      * Suggests a mutation to fix a complaint that there should be a space.
-     * 
+     *
      * @param complaint   Complaint result from running Lesshint.
      * @param fileInfo   Contents of the source file in various forms.
      * @returns Suggested mutation for the fix.
@@ -48,7 +48,7 @@ export class SpaceBetweenParensSuggester implements ISuggester<ISpaceBetweenPare
 
     /**
      * Suggests a mutation to fix a complaint that there should be no space.
-     * 
+     *
      * @param complaint   Complaint result from running Lesshint.
      * @param fileInfo   Contents of the source file in various forms.
      * @returns Suggested mutation for the fix.

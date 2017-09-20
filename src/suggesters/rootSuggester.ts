@@ -15,7 +15,7 @@ export class RootSuggester {
 
     /**
      * Suggests a mutation to fix a complaint, if possible.
-     * 
+     *
      * @param complaint   Complaint result from running Lesshint.
      * @param config   Configuration options for the rule.
      * @param fileInfo   Contents of the source file in various forms.

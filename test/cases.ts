@@ -1,9 +1,9 @@
 import { TestsFactory } from "automutate-tests/lib/testsFactory";
 import * as fs from "fs";
 
+import { fileContentsGetter } from "../lib/fileContentsGetter";
 import { LesshintMutationsProvider } from "../lib/lesshintMutationsProvider";
 import { LesshintWaveReporter } from "../lib/lesshintWaveReporter";
-import { fileContentsGetter } from "../lib/fileContentsGetter";
 
 const testsFactory = new TestsFactory(
     (fileName: string, settingsFileName: string) => {

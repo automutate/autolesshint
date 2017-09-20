@@ -26,7 +26,7 @@ export class SuggestersFactory {
 
     /**
      * Generates a suggester for a linter, if possible.
-     * 
+     *
      * @param linter   Name of a Lesshint linter.
      * @returns A Promise for the equivalent suggester, if possible.
      */
@@ -40,15 +40,15 @@ export class SuggestersFactory {
 
     /**
      * Finds and creates a suggester for a linter, if possible.
-     * 
+     *
      * @param linter   Name of a Lesshint linter.
      * @returns A Promise for the equivalent suggester, if possible.
      */
     private async createSuggester(linter: string): Promise<ISuggester<any> | undefined> {
-        const suggesterName: string = linter[0].toUpperCase() + linter.substring(1) + "Suggester";
-        const fileName: string = path.join(this.dirName, linter[0].toLowerCase() + linter.substring(1) + "Suggester.js");
+        const suggesterName = `${linter[0].toUpperCase()}${linter.substring(1)}Suggester`;
+        const fileName: string = path.join(this.dirName, `${linter[0].toLowerCase()}${linter.substring(1)}Suggester.js`);
         const exists: boolean = await new Promise<boolean>((resolve) => {
-            fs.exists(fileName, (exists: boolean): void => resolve(exists));
+            fs.exists(fileName, (fileExists: boolean): void => resolve(fileExists));
         });
 
         if (!exists) {

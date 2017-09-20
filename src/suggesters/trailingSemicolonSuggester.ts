@@ -9,7 +9,7 @@ import { ISuggester } from "../suggester";
 export class TrailingSemicolonSuggester implements ISuggester<void> {
     /**
      * Suggests a mutation to fix a complaint, if possible.
-     * 
+     *
      * @param complaint   Complaint result from running Lesshint.
      * @returns Suggested mutation for the fix.
      */

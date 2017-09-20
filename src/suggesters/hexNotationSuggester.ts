@@ -16,7 +16,7 @@ export interface IHexNotationConfig {
 export class HexNotationSuggester implements ISuggester<IHexNotationConfig> {
     /**
      * Suggests a mutation to fix a complaint.
-     * 
+     *
      * @param complaint   Complaint result from running Lesshint.
      * @returns Suggested mutation for the fix.
      */

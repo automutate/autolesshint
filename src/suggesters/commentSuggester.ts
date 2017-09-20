@@ -9,7 +9,7 @@ import { IFileInfo, ISuggester } from "../suggester";
 export class CommentSuggester implements ISuggester<void> {
     /**
      * Suggests a mutation to fix a complaint, if possible.
-     * 
+     *
      * @param complaint   Complaint result from running Lesshint.
      * @param config   Configuration options for the rule.
      * @param fileInfo   Contents of the source file in various forms.

@@ -12,7 +12,7 @@
   "dependencies": {
     "automutate": "0.5.X",
     "commander": "^2.11.0",
-    "lesshint": "^4.1.1"
+    "lesshint": "^4.1.2"
   },
   "devDependencies": {
     "@types/chai": "^4.0.4",

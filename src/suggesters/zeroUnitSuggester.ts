@@ -1,8 +1,8 @@
 import { ITextDeleteMutation } from "automutate/lib/mutators/textDeleteMutator";
 
-import { ITextInsertMutation } from "automutate/lib/mutators/textInsertMutator";
+import { ITextSwapMutation } from "automutate/lib/mutators/textSwapMutator";
 import { ILesshintComplaint } from "../lesshint";
-import { ISuggester } from "../suggester";
+import { IFileInfo, ISuggester } from "../suggester";
 
 /**
  * Configuration options for the zero_unit rule.
@@ -21,11 +21,13 @@ export class ZeroUnitSuggester implements ISuggester<IZeroUnitConfig> {
      * Suggests a mutation to fix a complaint.
      *
      * @param complaint   Complaint result from running Lesshint.
+     * @param config   Configuration options for the rule.
+     * @param fileInfo   Contents of the source file in various forms.
      * @returns Suggested mutation for the fix.
      */
-    public suggestMutation(complaint: ILesshintComplaint, config: IZeroUnitConfig): ITextDeleteMutation | ITextInsertMutation {
+    public suggestMutation(complaint: ILesshintComplaint, config: IZeroUnitConfig, fileInfo: IFileInfo): ITextDeleteMutation | ITextSwapMutation {
         return (config.style === "keep_unit" || complaint.message.indexOf(keepUnitMessage) !== -1)
-            ? this.suggestKeepUnitMutation(complaint)
+            ? this.suggestKeepUnitMutation(complaint, fileInfo.text)
             : this.suggestNoUnitMutation(complaint);
     }
 
@@ -33,15 +35,21 @@ export class ZeroUnitSuggester implements ISuggester<IZeroUnitConfig> {
      * Suggests a mutation to fix a complaint that units should be kept.
      *
      * @param complaint   Complaint result from running Lesshint.
+     * @param text   The file's original text.
      * @returns Suggested mutation for the fix.
      */
-    private suggestKeepUnitMutation(complaint: ILesshintComplaint): ITextInsertMutation {
+    private suggestKeepUnitMutation(complaint: ILesshintComplaint, text: string): ITextSwapMutation {
+        const { source } = complaint;
+        const insertion = source.replace(/0([\s;\r\n}])/g, "0px$1");
+        const begin = text.lastIndexOf(source, complaint.position);
+
         return {
-            insertion: "px",
+            insertion,
             range: {
-                begin: complaint.position + 1
+                begin,
+                end: begin + source.length
             },
-            type: "text-insert"
+            type: "text-swap"
         };
     }
 

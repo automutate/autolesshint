@@ -16,7 +16,14 @@ export class FinalNewlineSuggester implements ISuggester<void> {
      * @param fileInfo   Contents of the source file in various forms.
      * @returns Suggested mutation for the fix.
      */
-    public suggestMutation(complaint: ILesshintComplaint, config: void, fileInfo: IFileInfo): ITextInsertMutation {
+    public suggestMutation(complaint: ILesshintComplaint, config: void, fileInfo: IFileInfo): ITextInsertMutation | undefined {
+        const { text } = fileInfo;
+
+        // Fixes for https://github.com/lesshint/lesshint/issues/431
+        if (text[text.length - 1] === "\n") {
+            return undefined;
+        }
+
         return {
             insertion: getLinebreakStyle(fileInfo.linesRaw),
             range: {

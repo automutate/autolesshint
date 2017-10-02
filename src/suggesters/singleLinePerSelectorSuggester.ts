@@ -17,8 +17,15 @@ export class SingleLinePerSelectorSuggester implements ISuggester<void> {
      * @returns Suggested mutation for the fix.
      */
     public suggestMutation(complaint: ILesshintComplaint, config: void, fileInfo: IFileInfo): ITextInsertMutation | undefined {
+        // The selector can somehow be the first line in the file
+        // See https://github.com/automutate/autolesshint/issues/65
+        const sourceLine = fileInfo.linesRaw[complaint.line - 1];
+        if (sourceLine === undefined) {
+            return undefined;
+        }
+
         // The first property in a line shouldn't have a newline added
-        if (!/\S/.test(fileInfo.linesRaw[complaint.line - 1].substring(0, complaint.column - 1))) {
+        if (!/\S/.test(sourceLine.substring(0, complaint.column - 1))) {
             return undefined;
         }
 

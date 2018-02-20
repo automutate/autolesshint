@@ -1,6 +1,6 @@
 {
   "name": "autolesshint",
-  "version": "0.1.8",
+  "version": "0.2.0",
   "description": "Automagically fixes lesshint errors in .less files.",
   "index": "bin/autolesshint",
   "bin": {
@@ -11,27 +11,26 @@
   },
   "dependencies": {
     "automutate": "0.5.X",
-    "commander": "^2.11.0",
-    "lesshint": "^4.1.2"
+    "commander": "^2.14.1",
+    "lesshint": "^4.6.4"
   },
   "devDependencies": {
-    "@types/chai": "^4.0.4",
-    "@types/es6-promise": "0.0.33",
-    "@types/glob": "^5.0.32",
-    "@types/mocha": "^2.2.43",
+    "@types/chai": "^4.1.2",
+    "@types/glob": "^5.0.35",
+    "@types/mocha": "^2.2.48",
     "automutate-tests": "^0.1.2",
     "chai": "^4.1.2",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
-    "gulp-mocha": "^4.3.1",
-    "gulp-sourcemaps": "^2.6.1",
-    "gulp-tslint": "^8.1.2",
-    "gulp-typescript": "^3.2.2",
-    "merge2": "^1.2.0",
-    "mocha": "^3.5.3",
-    "run-sequence": "^2.2.0",
-    "tslint": "^5.7.0",
-    "typescript": "^2.5.2"
+    "gulp-mocha": "^5.0.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-tslint": "^8.1.3",
+    "gulp-typescript": "^4.0.1",
+    "merge2": "^1.2.1",
+    "mocha": "^5.0.1",
+    "run-sequence": "^2.2.1",
+    "tslint": "5.9.1",
+    "typescript": "^2.7.2"
   },
   "scripts": {
     "test": "gulp test"

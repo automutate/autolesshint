@@ -52,21 +52,6 @@ gulp.task("test:run", function () {
         .pipe(mocha());
 });
 
-gulp.task("test:tslint", function () {
-    var gulpTslint = require("gulp-tslint");
-    var tslint = require("tslint");
-
-    var program = tslint.Linter.createProgram("./test/tsconfig.json");
-
-    return gulp
-        .src(["test/**/*.ts", "!test/**/*.d.ts"])
-        .pipe(gulpTslint({
-            formatter: "stylish",
-            program
-        }))
-        .pipe(gulpTslint.report());
-});
-
 gulp.task("test:tsc", function () {
     var ts = require("gulp-typescript");
 
@@ -91,7 +76,7 @@ gulp.task("src", function (callback) {
 });
 
 gulp.task("test", function (callback) {
-    runSequence(["test:tsc", "test:tslint"], "test:run", callback);
+    runSequence(["test:tsc"], "test:run", callback);
 });
 
 gulp.task("watch", ["src"], function () {

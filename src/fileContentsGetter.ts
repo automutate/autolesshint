@@ -17,7 +17,7 @@ export interface IFileContentsGetter {
  * @returns A Promise for the contents of the file.
  */
 export const fileContentsGetter = async (fileName: string): Promise<string> =>
-    await new Promise<string>((resolve, reject): void => {
+    new Promise<string>((resolve, reject): void => {
         fs.readFile(fileName, (error: Error | undefined, data: Buffer): void => {
             error ? reject(error) : resolve(data.toString());
         });

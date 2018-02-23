@@ -1,6 +1,6 @@
 {
   "name": "autolesshint",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Automagically fixes lesshint errors in .less files.",
   "index": "bin/autolesshint",
   "bin": {

@@ -37,7 +37,7 @@ const getConfigSettings = async (configFilePath?: string) => {
         return {};
     }
 
-    return await new Promise<ILesshintConfig>((resolve, reject) => {
+    return new Promise<ILesshintConfig>((resolve, reject) => {
         fs.readFile(configFilePath, (error: Error | undefined, contents: string | Buffer): void => {
             error
                 ? resolve({})

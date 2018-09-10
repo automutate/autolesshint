@@ -62,7 +62,7 @@ export class LesshintWaveReporter {
                     }
 
                     const fileContents: string = await this.fileContentsGetter(complaint.fullPath);
-                    const linesRaw: string[] = fileContents.match(/[^\n]+(?:\r?\n|$)/g) as string[];
+                    const linesRaw: string[] = fileContents.match(/([^\r\n]*(?:\r?\n)|[^\r\n]+)/g) as string[];
                     const suggestedFix = await this.rootSuggester.suggestMutation(
                         complaint,
                         this.configs[complaint.linter] || {},

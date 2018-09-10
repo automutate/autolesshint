@@ -20,7 +20,7 @@ export interface IFileInfo {
 /**
  * Adds fix suggestions to Lesshint complaints.
  *
- * @type TConfig   Configuration options for the rule.
+ * @template TConfig   Configuration options for the rule.
  */
 export interface ISuggester<TConfig> {
     /**

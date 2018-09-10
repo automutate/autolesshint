@@ -27,7 +27,7 @@
     "spaceAroundComma": false,
     "spaceAroundOperator": false,
     "spaceBeforeBrace": {
-        "enabled": true,
+        "enabled": true, 
         "style": "no_space"
     },
     "spaceBetweenParens": false,

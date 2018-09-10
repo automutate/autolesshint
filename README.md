@@ -1,4 +1,6 @@
 # autolesshint
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/automutate/autolesshint.svg)](https://greenkeeper.io/)
 [![npm](https://img.shields.io/npm/v/autolesshint.svg)](https://www.npmjs.com/package/autolesshint)
 
 `autolesshint` is a tool to automatically fix [Lesshint](https://github.com/lesshint/lesshint) >=v4.0.0 complaints.

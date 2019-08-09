@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "automutate": "0.5.X",
-    "commander": "^2.19.0",
+    "commander": "^3.0.0",
     "lesshint": "^5.3.0"
   },
   "devDependencies": {
